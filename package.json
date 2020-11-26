@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/MichaelLegg/StoryPointNinjaBackend#readme",
   "dependencies": {
+    "@types/express": "^4.17.9",
     "eslint": "^7.14.0",
     "express": "^4.17.1",
     "socket.io": "^3.0.3",
@@ -26,6 +27,8 @@
   "devDependencies": {
     "@types/node": "^14.14.10",
     "@types/socket.io": "^2.1.11",
+    "@typescript-eslint/eslint-plugin": "^4.8.2",
+    "@typescript-eslint/parser": "^4.8.2",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.1.4",
     "nodemon": "^2.0.6",
