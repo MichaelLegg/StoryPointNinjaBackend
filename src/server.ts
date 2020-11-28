@@ -3,6 +3,7 @@ import { Server as SocketIoServer, Socket } from "socket.io";
 import { Session } from "./models/session";
 import { Events } from "./models/common/events";
 import { generateJoinCode } from "./util/wordLoader";
+import NewSession from "./models/common/dtos/newSession";
 
 const port = process.env.port || 3001;
 const app: express.Application = express();
@@ -22,14 +23,22 @@ io.on("connection", (socket: Socket) => {
     console.log(`Their join code was ${data}`);
   });
 
-  socket.on(Events.CREATE_SESSION, () => {
+  socket.on(Events.CREATE_SESSION, (newSession: NewSession) => {
     console.log("create");
     const joinCode = generateJoinCode(sessions);
     sessions["joinCode"] = {
-      clients: [{ submitted: false }],
+      clients: [
+        {
+          submitted: false,
+          displayName: newSession.displayName,
+        },
+      ],
       joinCode: joinCode,
       roundState: "creating",
+      scoringMethod: newSession.scoringMethod,
     };
-    console.log(`Created new session with code: ${joinCode}`);
+    console.log(
+      `Created new session with code: ${JSON.stringify(sessions["joinCode"])}`
+    );
   });
 });
